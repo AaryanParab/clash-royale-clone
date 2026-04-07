@@ -22,7 +22,7 @@ ModelImporter:
     animationDoRetargetingWarnings: 0
     importAnimatedCustomProperties: 0
     importConstraints: 0
-    animationCompression: 1
+    animationCompression: 3
     animationRotationError: 0.5
     animationPositionError: 0.5
     animationScaleError: 0.5
@@ -199,7 +199,107 @@ ModelImporter:
   humanDescription:
     serializedVersion: 3
     human: []
-    skeleton: []
+    skeleton:
+    - name: Low Poly Knight(Clone)
+      parentName: 
+      position: {x: -0, y: 0.36597756, z: 0}
+      rotation: {x: -0.7064338, y: 0.030843558, z: 0.030843558, w: 0.7064338}
+      scale: {x: 1.1138064, y: 1.1138064, z: 0.2577308}
+    - name: Leg_Leg
+      parentName: Low Poly Knight(Clone)
+      position: {x: -0.056535218, y: 0.00017502323, z: -0.07464122}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 0.72863334, y: 0.72863334, z: 3.938552}
+    - name: Left_foot
+      parentName: Leg_Leg
+      position: {x: 0.0017735352, y: -0.000032739645, z: -0.34230673}
+      rotation: {x: 1, y: 0, z: 0, w: -6.123234e-17}
+      scale: {x: 1.1493987, y: 1.2321999, z: 1.9199024}
+    - name: Right_leg
+      parentName: Low Poly Knight(Clone)
+      position: {x: 0.053540424, y: 0.00017502323, z: -0.10633893}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 0.72863334, y: 0.72863334, z: 3.938552}
+    - name: Right_foot
+      parentName: Right_leg
+      position: {x: 0.0036935585, y: -0.000032737524, z: -0.3342586}
+      rotation: {x: 1, y: 0, z: 0, w: -6.123234e-17}
+      scale: {x: 1.1493987, y: 1.2321999, z: 1.9199024}
+    - name: Skirt
+      parentName: Low Poly Knight(Clone)
+      position: {x: -6.055832e-10, y: -0.000002037182, z: 0.027388949}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 0.8882772, y: 0.8882772, z: 0.8882769}
+    - name: Armor
+      parentName: Low Poly Knight(Clone)
+      position: {x: -0.006454226, y: 0.00056467025, z: -0.42026103}
+      rotation: {x: 0, y: -0, z: -0.043619372, w: 0.99904823}
+      scale: {x: 1.0000001, y: 1.0000001, z: 3.6951513}
+    - name: 'Right_shoulder '
+      parentName: Armor
+      position: {x: 0.13394502, y: -0.0010506959, z: 0.16686234}
+      rotation: {x: 0, y: -0.043619387, z: -0, w: 0.99904823}
+      scale: {x: 0.897822, y: 0.897822, z: 1.0500294}
+    - name: Right_shoulder_pad
+      parentName: 'Right_shoulder '
+      position: {x: 0.03350563, y: 0.0058864267, z: -0.0043871547}
+      rotation: {x: 0.43045938, y: 0.43045944, z: 0.5609855, w: 0.56098545}
+      scale: {x: 1.7004206, y: 0.9999999, z: 1}
+    - name: Right_arm
+      parentName: 'Right_shoulder '
+      position: {x: -0, y: 0.000000006055832, z: -0.24066204}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 0.60926306, y: 0.60926306, z: 1.4266298}
+    - name: Right_hand
+      parentName: Right_arm
+      position: {x: 0.0035423613, y: 0.0000000063586234, z: -0.06575852}
+      rotation: {x: -0.54157436, y: -0.03635739, z: 0.014763879, w: 0.83973646}
+      scale: {x: 1.6413273, y: 1.641327, z: 0.70095265}
+    - name: Sword
+      parentName: Right_hand
+      position: {x: -0.0031020588, y: 0.046317875, z: 0.00023200134}
+      rotation: {x: -0.6482249, y: -0.7307856, z: 0.1799252, w: -0.115688965}
+      scale: {x: 0.5299037, y: 0.51557726, z: 1}
+    - name: 'Left_shoulder '
+      parentName: Armor
+      position: {x: -0.1430117, y: -0.0010506959, z: 0.16686234}
+      rotation: {x: 0.99904823, y: -2.6709166e-18, z: -0.04361938, w: -6.117406e-17}
+      scale: {x: -0.897822, y: 0.897822, z: -1.0500296}
+    - name: Left_shoulder_pad
+      parentName: 'Left_shoulder '
+      position: {x: 0.03350563, y: 0.0058864267, z: -0.0043871547}
+      rotation: {x: 0.43045938, y: 0.43045944, z: 0.5609855, w: 0.56098545}
+      scale: {x: 1.7004206, y: 0.9999999, z: 1}
+    - name: Left_arm
+      parentName: 'Left_shoulder '
+      position: {x: -0, y: 0.000000006055832, z: -0.24066204}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 0.60926306, y: 0.60926306, z: 1.4266298}
+    - name: Left_hand
+      parentName: Left_arm
+      position: {x: 0.0035423613, y: 0.0000000063586234, z: -0.06575852}
+      rotation: {x: 0.041144773, y: 0.000000026077032, z: 0.47028694, w: 0.88155395}
+      scale: {x: 1.6413273, y: 1.641327, z: 0.70095265}
+    - name: Shield
+      parentName: Left_hand
+      position: {x: 0.021318099, y: 0.005886462, z: -0.016026812}
+      rotation: {x: 0.7387675, y: 0.00000024912623, z: 0.6739603, w: -0.00000007875241}
+      scale: {x: 1.6533939, y: 1.0000001, z: 0.998392}
+    - name: Head
+      parentName: Armor
+      position: {x: -0, y: -0.000000011203289, z: 0.3834987}
+      rotation: {x: 0.18223563, y: -0.0000000018626451, z: 0.000000011175871, w: -0.98325497}
+      scale: {x: 0.897822, y: 0.897822, z: 1.0500294}
+    - name: Helmet
+      parentName: Head
+      position: {x: -0, y: 0.000000012717247, z: 0.1412169}
+      rotation: {x: 0.40116614, y: 0.009373834, z: -0.024419656, w: 0.9156318}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Feather
+      parentName: Helmet
+      position: {x: -0.0036975702, y: 0.0047161547, z: 0.29831746}
+      rotation: {x: 0.6087616, y: -0, z: -0, w: 0.7933532}
+      scale: {x: 1, y: 0.99999994, z: 1}
     armTwist: 0.5
     foreArmTwist: 0.5
     upperLegTwist: 0.5
@@ -216,7 +316,7 @@ ModelImporter:
   autoGenerateAvatarMappingIfUnspecified: 1
   animationType: 2
   humanoidOversampling: 1
-  avatarSetup: 0
+  avatarSetup: 1
   addHumanoidExtraRootOnlyWhenUsingAvatar: 1
   importBlendShapeDeformPercent: 1
   remapMaterialsIfMaterialImportModeIsNone: 0
