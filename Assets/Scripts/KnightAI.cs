@@ -1,13 +1,15 @@
+using UnityEngine;
+
 public class KnightAI : TroopAI
 {
     protected override void Awake()
     {
         base.Awake();
-        moveSpeed = 2.3f;
-        stoppingDistance = 1.2f;
-        attackRange = 1.8f;
-        damagePerSecond = 2.8f;
-        attackCooldown = 1.35f;
-        attackAnimationDelay = 0.25f;     // Feel free to tweak
+
+        stoppingDistance = 1.4f;     // Gets nicely onto the small green platform
+        attackRange = 1.7f;          // Starts attacking when close enough to visually hit
+        moveSpeed = 2.6f;
+        damagePerSecond = 30f;
+        attackCooldown = 1.0f;
     }
 }

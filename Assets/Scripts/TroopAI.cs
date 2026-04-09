@@ -4,26 +4,30 @@ using UnityEngine.AI;
 public class TroopAI : MonoBehaviour
 {
     [Header("Movement")]
-    public float moveSpeed = 3.5f;
-    public float stoppingDistance = 1.5f;
+    public float moveSpeed = 2.5f;
+    public float stoppingDistance = 1.6f;
 
     [Header("Combat")]
-    public float attackRange = 2.5f;
+    public float attackRange = 2.3f;
     public float damagePerSecond = 1f;
-    public float attackCooldown = 1f;
-    public float attackAnimationDelay = 0.2f;     // ← Time before attack animation plays
+    public float attackCooldown = 1.2f;
+    public float attackAnimationDelay = 0.15f;
 
     protected NavMeshAgent agent;
+    protected Rigidbody rb;
     protected Transform currentTarget;
     protected float lastAttackTime = 0f;
     protected Animator animator;
 
-    protected enum State { Idle, Walking, Attacking }
+    protected enum State { Idle, Moving, Attacking }
     protected State currentState = State.Idle;
+
+    private bool isPlayerTroop = false;
 
     protected virtual void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
+        rb = GetComponent<Rigidbody>();
         animator = GetComponentInChildren<Animator>();
 
         if (agent != null)
@@ -32,7 +36,22 @@ public class TroopAI : MonoBehaviour
             agent.stoppingDistance = stoppingDistance;
             agent.updateRotation = true;
             agent.autoBraking = true;
-            agent.acceleration = 8f;
+            agent.acceleration = 15f;
+
+            agent.obstacleAvoidanceType = ObstacleAvoidanceType.NoObstacleAvoidance;
+            agent.radius = 0.25f;
+        }
+
+        if (rb != null)
+        {
+            rb.constraints = RigidbodyConstraints.FreezeRotation;
+        }
+
+        int troopLayer = LayerMask.NameToLayer("troop");
+        if (troopLayer != -1)
+        {
+            gameObject.layer = troopLayer;
+            Physics.IgnoreLayerCollision(troopLayer, troopLayer, true);
         }
     }
 
@@ -40,17 +59,27 @@ public class TroopAI : MonoBehaviour
     {
         if (agent != null)
             agent.stoppingDistance = stoppingDistance;
+
+        animator.SetBool("IsWalking", false);
+        animator.SetBool("IsAttacking", false);
     }
 
     protected virtual void Update()
     {
         if (agent == null || !agent.isOnNavMesh) return;
 
-        FindNearestEnemyTower();
+        if (!isPlayerTroop && gameObject.CompareTag("PlayerTroop"))
+            isPlayerTroop = true;
+
+        // Re-check for nearest target ONLY when moving or when current target dies
+        if (currentTarget == null || !currentTarget.gameObject.activeInHierarchy || currentState == State.Moving)
+        {
+            FindNearestTarget();
+        }
 
         if (currentTarget == null)
         {
-            ChangeState(State.Idle);
+            EnterIdleState();
             return;
         }
 
@@ -59,104 +88,129 @@ public class TroopAI : MonoBehaviour
         if (distance <= attackRange)
         {
             if (currentState != State.Attacking)
-            {
-                ChangeState(State.Attacking);
-            }
+                EnterAttackState();
+
             AttackTarget();
         }
         else
         {
-            if (currentState != State.Walking)
-            {
-                ChangeState(State.Walking);
-            }
-            MoveTowardsTarget();
+            if (currentState != State.Moving)
+                EnterMovingState();
+
+            MoveToTarget();
         }
     }
 
-    private void ChangeState(State newState)
+    // Finds the absolute nearest target (troop or tower)
+    private void FindNearestTarget()
     {
-        if (currentState == newState) return;
-        currentState = newState;
+        string enemyTroopTag = isPlayerTroop ? "EnemyTroop" : "PlayerTroop";
+        string enemyTowerTag = isPlayerTroop ? "EnemyTower" : "PlayerTower";
 
-        if (animator == null) return;
+        Transform bestTarget = null;
+        float bestDistance = Mathf.Infinity;
 
-        switch (newState)
+        // Check enemy troops
+        GameObject[] enemyTroops = GameObject.FindGameObjectsWithTag(enemyTroopTag);
+        foreach (GameObject troop in enemyTroops)
         {
-            case State.Idle:
-                animator.SetBool("IsWalking", false);
-                animator.SetBool("IsAttacking", false);
-                break;
+            if (!troop.activeInHierarchy) continue;
 
-            case State.Walking:
-                animator.SetBool("IsWalking", true);
-                animator.SetBool("IsAttacking", false);
-                break;
-
-            case State.Attacking:
-                animator.SetBool("IsWalking", false);
-                animator.SetBool("IsAttacking", true);
-                break;
-        }
-    }
-
-    private void FindNearestEnemyTower()
-    {
-        GameObject[] enemyTowers = GameObject.FindGameObjectsWithTag("EnemyTower");
-        if (enemyTowers.Length == 0) return;
-
-        float shortestDistance = Mathf.Infinity;
-        Transform nearest = null;
-
-        foreach (GameObject tower in enemyTowers)
-        {
-            float dist = Vector3.Distance(transform.position, tower.transform.position);
-            if (dist < shortestDistance)
+            float dist = Vector3.Distance(transform.position, troop.transform.position);
+            if (dist < bestDistance)
             {
-                shortestDistance = dist;
-                nearest = tower.transform;
+                bestDistance = dist;
+                bestTarget = troop.transform;
             }
         }
 
-        if (nearest != currentTarget && nearest != null)
+        // Check enemy tower
+        GameObject towerObj = GameObject.FindGameObjectWithTag(enemyTowerTag);
+        if (towerObj != null)
         {
-            currentTarget = nearest;
-            if (agent.isOnNavMesh)
+            float towerDist = Vector3.Distance(transform.position, towerObj.transform.position);
+            if (towerDist < bestDistance)
             {
-                agent.SetDestination(currentTarget.position);
-                agent.isStopped = false;
+                bestDistance = towerDist;
+                bestTarget = towerObj.transform;
             }
         }
+
+        currentTarget = bestTarget;
     }
 
-    private void MoveTowardsTarget()
+    private void EnterIdleState()
     {
-        if (currentTarget == null || agent == null || !agent.isOnNavMesh) return;
-        agent.SetDestination(currentTarget.position);
+        if (currentState == State.Idle) return;
+        currentState = State.Idle;
+        agent.isStopped = true;
+        animator.SetBool("IsWalking", false);
+        animator.SetBool("IsAttacking", false);
+    }
+
+    private void EnterMovingState()
+    {
+        if (currentState == State.Moving) return;
+        currentState = State.Moving;
+        agent.isStopped = false;
+        agent.updateRotation = true;
+
+        animator.SetBool("IsWalking", true);
+        animator.SetBool("IsAttacking", false);
+    }
+
+    private void EnterAttackState()
+    {
+        if (currentState == State.Attacking) return;
+        currentState = State.Attacking;
+        agent.isStopped = true;
+        agent.updateRotation = false;
+
+        animator.SetBool("IsWalking", false);
+        animator.SetBool("IsAttacking", true);
+    }
+
+    private void MoveToTarget()
+    {
+        if (currentTarget != null)
+            agent.SetDestination(currentTarget.position);
     }
 
     protected virtual void AttackTarget()
     {
-        if (Time.time - lastAttackTime < attackCooldown) 
-            return;
+        if (Time.time - lastAttackTime < attackCooldown) return;
 
         lastAttackTime = Time.time;
 
-        // Deal damage immediately
-        Tower tower = currentTarget.GetComponent<Tower>();
-        if (tower != null)
-            tower.TakeDamage(damagePerSecond * attackCooldown);
-
-        // Trigger attack animation AFTER a small delay
-        if (animator != null)
+        if (currentTarget != null)
         {
-            Invoke("TriggerAttackAnimation", attackAnimationDelay);
+            Vector3 dir = (currentTarget.position - transform.position).normalized;
+            dir.y = 0f;
+            transform.rotation = Quaternion.LookRotation(dir);
         }
+
+        Health health = currentTarget.GetComponent<Health>();
+        if (health != null)
+            health.TakeDamage(damagePerSecond * attackCooldown);
+        else
+        {
+            Tower tower = currentTarget.GetComponent<Tower>();
+            if (tower != null)
+                tower.TakeDamage(damagePerSecond * attackCooldown);
+        }
+
+        if (animator != null)
+            Invoke("TriggerAttackAnimation", attackAnimationDelay);
     }
 
-    // This function is called after the delay
     private void TriggerAttackAnimation()
     {
-        animator.SetTrigger("Attack");
+        if (animator != null)
+            animator.SetTrigger("Attack");
+    }
+
+    public void SetTarget(Transform target)
+    {
+        currentTarget = target;
     }
 }

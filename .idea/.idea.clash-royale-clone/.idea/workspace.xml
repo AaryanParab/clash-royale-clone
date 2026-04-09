@@ -5,20 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fa8470f4-5d0c-489c-8045-47d8e691ba6c" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.clash-royale-clone/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.clash-royale-clone/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Imports/archer/source/Archer.controller" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Imports/archer/source/Archer.controller" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Imports/knight/source/Low Poly Knight.controller" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Imports/knight/source/Low Poly Knight.controller" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Archer.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Archer.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Knight.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Knight.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/SampleScene/NavMesh-tile.asset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/SampleScene/NavMesh-tile.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/MainScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/MainScene.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/MainScene/NavMesh-tile.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/MainScene/NavMesh-tile.asset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/ArcherAI.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/ArcherAI.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/KnightAI.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/KnightAI.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Tower.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Tower.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/TroopAI.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/TroopAI.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/NavMeshAreas.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/NavMeshAreas.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -113,6 +108,7 @@
       <workItem from="1775579485098" duration="2838000" />
       <workItem from="1775643708489" duration="3847000" />
       <workItem from="1775727648166" duration="1602000" />
+      <workItem from="1775737117562" duration="3274000" />
     </task>
     <servers />
   </component>

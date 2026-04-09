@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4530837428999329790}
   - component: {fileID: 3916415591717577851}
   - component: {fileID: 3557197369817233051}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Arrow2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -102,7 +102,7 @@ GameObject:
   - component: {fileID: 2536205980963760975}
   - component: {fileID: 8361733907096803678}
   - component: {fileID: 1627252173427728948}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Right_hand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -195,7 +195,7 @@ GameObject:
   - component: {fileID: 4809556289697104899}
   - component: {fileID: 5839803225999252986}
   - component: {fileID: 6816682089084189618}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Archer_Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -312,7 +312,8 @@ GameObject:
   - component: {fileID: 8514713723990485671}
   - component: {fileID: 4367531428720597632}
   - component: {fileID: 5010921978731109900}
-  m_Layer: 0
+  - component: {fileID: 7833944529779278648}
+  m_Layer: 7
   m_Name: Archer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -343,7 +344,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1148322857202653890}
   serializedVersion: 5
-  m_Mass: 1
+  m_Mass: 70
   m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -358,7 +359,7 @@ Rigidbody:
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 1
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
@@ -399,12 +400,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ArcherAI
   moveSpeed: 3
   stoppingDistance: 1.5
-  attackRange: 2.5
-  damagePerSecond: 1
+  attackRange: 1.5
+  damagePerSecond: 20
   attackCooldown: 1
-  attackAnimationDelay: 0.2
+  attackAnimationDelay: 0.15
   arrowPrefab: {fileID: 1160867654837931229, guid: 57c417a3832a2064c8eeffe1321c791c, type: 3}
-  shootPoint: {fileID: 775146286084307083}
 --- !u!195 &5010921978731109900
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -417,16 +417,34 @@ NavMeshAgent:
   m_Radius: 0.25
   m_Speed: 3.5
   m_Acceleration: 8
-  avoidancePriority: 50
+  avoidancePriority: 60
   m_AngularSpeed: 120
   m_StoppingDistance: 0
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 0
-  m_AutoRepath: 1
+  m_AutoRepath: 0
   m_Height: 1
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &7833944529779278648
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1148322857202653890}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf02d1b228a7fec4cac976d23a497fe2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  maxHealth: 100
+  currentHealth: 100
+  destroyOnDeath: 1
+  onDeath:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1526043038266095763
 GameObject:
   m_ObjectHideFlags: 0
@@ -438,7 +456,7 @@ GameObject:
   - component: {fileID: 6344328407582888764}
   - component: {fileID: 5328251861279159067}
   - component: {fileID: 7925236004135295639}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Left_arm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -529,7 +547,7 @@ GameObject:
   - component: {fileID: 2497660332809012314}
   - component: {fileID: 5249323830782949331}
   - component: {fileID: 3263377260655792435}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: 'Right_shoulder '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -620,7 +638,7 @@ GameObject:
   - component: {fileID: 3845065596036093150}
   - component: {fileID: 3205503693837010983}
   - component: {fileID: 1407278570958927533}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Right_foot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -710,7 +728,7 @@ GameObject:
   - component: {fileID: 5459851193195887033}
   - component: {fileID: 2204830694969789499}
   - component: {fileID: 4207574127665499044}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Right_arm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -801,7 +819,7 @@ GameObject:
   - component: {fileID: 7625903346484480460}
   - component: {fileID: 5708098678773248088}
   - component: {fileID: 2849154219870073470}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Right_leg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -892,7 +910,7 @@ GameObject:
   - component: {fileID: 3946054777380676713}
   - component: {fileID: 3385986978441059789}
   - component: {fileID: 3990445855775044276}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Leg_Leg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -983,7 +1001,7 @@ GameObject:
   - component: {fileID: 1002579488122788339}
   - component: {fileID: 5644329706266253262}
   - component: {fileID: 4828302354662470586}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Left_hand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1073,7 +1091,7 @@ GameObject:
   - component: {fileID: 5026078166884891085}
   - component: {fileID: 5504937958541376030}
   - component: {fileID: 7877855414993802484}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Arrow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1164,7 +1182,7 @@ GameObject:
   - component: {fileID: 2188416479185248335}
   - component: {fileID: 3259366276668899137}
   - component: {fileID: 8179436452833690809}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1255,7 +1273,7 @@ GameObject:
   - component: {fileID: 1611939182302013208}
   - component: {fileID: 6876866319959114557}
   - component: {fileID: 8731764799639195656}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Bow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1346,7 +1364,7 @@ GameObject:
   - component: {fileID: 7185051948161176445}
   - component: {fileID: 3148028552437412167}
   - component: {fileID: 5350970933202910840}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Left_foot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1436,7 +1454,7 @@ GameObject:
   - component: {fileID: 9109864265740269020}
   - component: {fileID: 7747331510691680892}
   - component: {fileID: 2371900259034183843}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Armor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1529,7 +1547,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 775146286084307083}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SpawnPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1562,7 +1580,7 @@ GameObject:
   - component: {fileID: 8052782897077311340}
   - component: {fileID: 6520949889651169375}
   - component: {fileID: 7835120226207388569}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Helmet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1652,7 +1670,7 @@ GameObject:
   - component: {fileID: 8826070032797689379}
   - component: {fileID: 8019698862601706363}
   - component: {fileID: 1143937692117625828}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: 'Left_shoulder '
   m_TagString: Untagged
   m_Icon: {fileID: 0}

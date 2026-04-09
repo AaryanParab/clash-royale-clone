@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 3
   tags:
   - EnemyTower
+  - PlayerTower
+  - EnemyTroop
+  - PlayerTroop
   layers:
   - Default
   - TransparentFX
@@ -12,8 +15,8 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
+  - Tower
+  - Troop
   - 
   - 
   - 
