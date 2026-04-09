@@ -3,15 +3,15 @@ using UnityEngine.Events;
 
 public class Tower : MonoBehaviour
 {
-    [Header("Tower Settings")]
+    [Header("Tower Health Settings")]
     public float maxHealth = 100f;
     public float currentHealth;
 
-    [Header("Visuals")]
-    //public HealthBarUI healthBar;           // Assign your HP bar if you have one
+    [Header("UI")]
+    public HealthBarUI healthBar;           // Assign your health bar UI here
 
     [Header("Events")]
-    public UnityEvent onDeath;
+    public UnityEvent onDeath;              // Called when tower is destroyed
 
     private bool isDead = false;
 
@@ -22,7 +22,7 @@ public class Tower : MonoBehaviour
     }
 
     /// <summary>
-    /// Damages the tower
+    /// Call this when any troop attacks the tower
     /// </summary>
     public void TakeDamage(float damage)
     {
@@ -33,7 +33,7 @@ public class Tower : MonoBehaviour
 
         UpdateHealthBar();
 
-        if (currentHealth <= 0f)
+        if (currentHealth <= 0f && !isDead)
         {
             Die();
         }
@@ -41,33 +41,28 @@ public class Tower : MonoBehaviour
 
     private void UpdateHealthBar()
     {
-        //if (healthBar != null)
+        if (healthBar != null)
         {
-            //healthBar.UpdateHealth(currentHealth, maxHealth);
+            healthBar.UpdateHealth(currentHealth, maxHealth);
         }
     }
 
     private void Die()
     {
-        if (isDead) return;
         isDead = true;
-
         Debug.Log(gameObject.name + " has been destroyed!");
 
-        // Optional death effect
-        // if (deathEffect) Instantiate(deathEffect, transform.position, Quaternion.identity);
-
+        // Trigger win/lose condition in GameManager
         onDeath?.Invoke();
 
-        // You can destroy or disable the tower here
-        // Destroy(gameObject, 1.5f);
+        // Optional: Play death effect or disable tower
+        // gameObject.SetActive(false);
     }
 
-    // Optional: Heal function
-    public void Heal(float amount)
+    // Optional: For testing in Inspector
+    [ContextMenu("Take 20 Damage")]
+    private void TestDamage()
     {
-        if (isDead) return;
-        currentHealth = Mathf.Min(currentHealth + amount, maxHealth);
-        UpdateHealthBar();
+        TakeDamage(20f);
     }
 }

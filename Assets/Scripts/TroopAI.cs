@@ -5,56 +5,54 @@ public class TroopAI : MonoBehaviour
 {
     [Header("Movement")]
     public float moveSpeed = 3.5f;
+    public float stoppingDistance = 1.5f;
 
     [Header("Combat")]
     public float attackRange = 2.5f;
     public float damagePerSecond = 1f;
     public float attackCooldown = 1f;
+    public float attackAnimationDelay = 0.2f;     // ← Time before attack animation plays
 
     protected NavMeshAgent agent;
     protected Transform currentTarget;
     protected float lastAttackTime = 0f;
+    protected Animator animator;
 
-    protected enum State { Moving, Attacking }
-    protected State currentState = State.Moving;
+    protected enum State { Idle, Walking, Attacking }
+    protected State currentState = State.Idle;
 
     protected virtual void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
+        animator = GetComponentInChildren<Animator>();
 
         if (agent != null)
         {
             agent.speed = moveSpeed;
-            agent.stoppingDistance = attackRange - 0.5f;
+            agent.stoppingDistance = stoppingDistance;
             agent.updateRotation = true;
-            agent.autoBraking = false;           // ← Important
-            agent.acceleration = 8f;             // ← Helps movement start
+            agent.autoBraking = true;
+            agent.acceleration = 8f;
         }
     }
 
     protected virtual void Start()
     {
-        Invoke("ForceMove", 0.4f);               // Small delay to ensure NavMesh is ready
-    }
-
-    private void ForceMove()
-    {
-        if (agent != null && currentTarget != null && agent.isOnNavMesh)
-        {
-            agent.SetDestination(currentTarget.position);
-            agent.isStopped = false;
-        }
+        if (agent != null)
+            agent.stoppingDistance = stoppingDistance;
     }
 
     protected virtual void Update()
     {
-        if (agent == null || !agent.isOnNavMesh)
-            return;
+        if (agent == null || !agent.isOnNavMesh) return;
 
         FindNearestEnemyTower();
 
         if (currentTarget == null)
+        {
+            ChangeState(State.Idle);
             return;
+        }
 
         float distance = Vector3.Distance(transform.position, currentTarget.position);
 
@@ -62,26 +60,49 @@ public class TroopAI : MonoBehaviour
         {
             if (currentState != State.Attacking)
             {
-                currentState = State.Attacking;
-                agent.isStopped = true;
+                ChangeState(State.Attacking);
             }
             AttackTarget();
         }
         else
         {
-            if (currentState != State.Moving)
+            if (currentState != State.Walking)
             {
-                currentState = State.Moving;
-                agent.isStopped = false;
+                ChangeState(State.Walking);
             }
             MoveTowardsTarget();
+        }
+    }
+
+    private void ChangeState(State newState)
+    {
+        if (currentState == newState) return;
+        currentState = newState;
+
+        if (animator == null) return;
+
+        switch (newState)
+        {
+            case State.Idle:
+                animator.SetBool("IsWalking", false);
+                animator.SetBool("IsAttacking", false);
+                break;
+
+            case State.Walking:
+                animator.SetBool("IsWalking", true);
+                animator.SetBool("IsAttacking", false);
+                break;
+
+            case State.Attacking:
+                animator.SetBool("IsWalking", false);
+                animator.SetBool("IsAttacking", true);
+                break;
         }
     }
 
     private void FindNearestEnemyTower()
     {
         GameObject[] enemyTowers = GameObject.FindGameObjectsWithTag("EnemyTower");
-
         if (enemyTowers.Length == 0) return;
 
         float shortestDistance = Mathf.Infinity;
@@ -103,30 +124,39 @@ public class TroopAI : MonoBehaviour
             if (agent.isOnNavMesh)
             {
                 agent.SetDestination(currentTarget.position);
-                agent.isStopped = false;                    // Force it to move
-                Debug.Log(gameObject.name + " → moving to " + currentTarget.name);
+                agent.isStopped = false;
             }
         }
     }
 
     private void MoveTowardsTarget()
     {
-        if (currentTarget == null || agent == null || !agent.isOnNavMesh) 
-            return;
-
+        if (currentTarget == null || agent == null || !agent.isOnNavMesh) return;
         agent.SetDestination(currentTarget.position);
-        agent.isStopped = false;
     }
 
     protected virtual void AttackTarget()
     {
-        if (Time.time - lastAttackTime < attackCooldown)
+        if (Time.time - lastAttackTime < attackCooldown) 
             return;
 
         lastAttackTime = Time.time;
 
+        // Deal damage immediately
         Tower tower = currentTarget.GetComponent<Tower>();
         if (tower != null)
             tower.TakeDamage(damagePerSecond * attackCooldown);
+
+        // Trigger attack animation AFTER a small delay
+        if (animator != null)
+        {
+            Invoke("TriggerAttackAnimation", attackAnimationDelay);
+        }
+    }
+
+    // This function is called after the delay
+    private void TriggerAttackAnimation()
+    {
+        animator.SetTrigger("Attack");
     }
 }
