@@ -52,11 +52,17 @@ public class Tower : MonoBehaviour
         isDead = true;
         Debug.Log(gameObject.name + " has been destroyed!");
 
-        // Trigger win/lose condition in GameManager
+        // Tell UIManager to show end screen
+        if (UIManager.Instance != null)
+        {
+            string message = gameObject.name.Contains("Player") ? "Enemy Wins!" : "Player Wins!";
+            UIManager.Instance.ShowEndScreen(message);
+        }
+
         onDeath?.Invoke();
 
-        // Optional: Play death effect or disable tower
-        // gameObject.SetActive(false);
+        // Destroy the tower
+        Destroy(gameObject, 0.5f);
     }
 
     // Optional: For testing in Inspector

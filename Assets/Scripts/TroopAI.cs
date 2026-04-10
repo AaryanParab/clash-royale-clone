@@ -38,7 +38,7 @@ public class TroopAI : MonoBehaviour
             agent.autoBraking = true;
             agent.acceleration = 15f;
 
-            agent.obstacleAvoidanceType = ObstacleAvoidanceType.NoObstacleAvoidance;
+            //agent.obstacleAvoidanceType = ObstacleAvoidanceType.NoObstacleAvoidance;
             agent.radius = 0.25f;
         }
 

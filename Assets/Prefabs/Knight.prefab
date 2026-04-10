@@ -1763,7 +1763,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.25
-  m_Speed: 3.5
+  m_Speed: 0.3
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -1787,10 +1787,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba1e7629cc76c5a45ac75cc9af1a3f40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  moveSpeed: 3.5
+  moveSpeed: 0.3
   stoppingDistance: 0.2
-  attackRange: 2.5
-  damagePerSecond: 30
+  attackRange: 1
+  damagePerSecond: 0.5
   attackCooldown: 1
   attackAnimationDelay: 0.2
 --- !u!114 &2232157753462075188
@@ -1805,8 +1805,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf02d1b228a7fec4cac976d23a497fe2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Health
-  maxHealth: 100
-  currentHealth: 100
+  maxHealth: 3
+  currentHealth: 3
   destroyOnDeath: 1
   onDeath:
     m_PersistentCalls:

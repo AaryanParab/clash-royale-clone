@@ -2,38 +2,42 @@ using UnityEngine;
 
 public class ArrowProjectile : MonoBehaviour
 {
-    [Header("Arrow Settings")]
-    public float speed = 20f;
-    public float lifetime = 5f;           // Destroy after this time if it misses
-    public float damage = 10f;
+    [Header("Projectile Settings")]
+    public float speed = 12f;
+    public float damage = 1f;
+    public float lifetime = 5f;
 
     private Transform target;
     private bool hasHit = false;
 
-    public void SetTarget(Transform targetTransform, float damageAmount)
+    public void SetTarget(Transform newTarget, float damageAmount)
     {
-        target = targetTransform;
+        target = newTarget;
         damage = damageAmount;
     }
 
     private void Start()
     {
-        Destroy(gameObject, lifetime);   // Auto destroy if it doesn't hit anything
+        Destroy(gameObject, lifetime);   // Safety destroy
     }
 
     private void Update()
     {
-        if (hasHit || target == null) return;
+        if (hasHit || target == null) 
+        {
+            Destroy(gameObject);
+            return;
+        }
 
-        // Move towards the target
+        // Move toward target
         Vector3 direction = (target.position - transform.position).normalized;
         transform.position += direction * speed * Time.deltaTime;
 
-        // Face the direction of movement
+        // Rotate to face target
         transform.rotation = Quaternion.LookRotation(direction);
 
         // Check if close enough to hit
-        if (Vector3.Distance(transform.position, target.position) < 0.8f)
+        if (Vector3.Distance(transform.position, target.position) < 0.5f)
         {
             HitTarget();
         }
@@ -41,31 +45,28 @@ public class ArrowProjectile : MonoBehaviour
 
     private void HitTarget()
     {
+        if (hasHit) return;
         hasHit = true;
 
-        // Deal damage to the tower
-        Tower tower = target.GetComponent<Tower>();
-        if (tower != null)
+        // Deal damage - works on BOTH troops (Health) and towers (Tower)
+        Health health = target.GetComponent<Health>();
+        if (health != null)
         {
-            tower.TakeDamage(damage);
+            health.TakeDamage(damage);
+        }
+        else
+        {
+            Tower tower = target.GetComponent<Tower>();
+            if (tower != null)
+                tower.TakeDamage(damage);
         }
 
-        // Optional: Add hit effect here (particles, sound, etc.)
-        // Instantiate(hitEffect, transform.position, Quaternion.identity);
-
-        // Destroy the arrow
-        Destroy(gameObject, 0.1f);
+        Destroy(gameObject);
     }
 
-    // Optional: Destroy on collision with anything (safety)
-    private void OnTriggerEnter(Collider other)
+    // Optional: Visual hit effect
+    private void OnDestroy()
     {
-        if (hasHit) return;
-
-        Tower tower = other.GetComponent<Tower>();
-        if (tower != null)
-        {
-            HitTarget();
-        }
+        // You can instantiate a hit particle here later
     }
 }

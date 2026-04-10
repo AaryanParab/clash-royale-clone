@@ -398,13 +398,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd369521038fed240985bb2166b35b3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ArcherAI
-  moveSpeed: 3
+  moveSpeed: 0.5
   stoppingDistance: 1.5
-  attackRange: 1.5
-  damagePerSecond: 20
+  attackRange: 2
+  damagePerSecond: 1
   attackCooldown: 1
   attackAnimationDelay: 0.15
   arrowPrefab: {fileID: 1160867654837931229, guid: 57c417a3832a2064c8eeffe1321c791c, type: 3}
+  arrowSpawnHeight: 1.4
 --- !u!195 &5010921978731109900
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -415,7 +416,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.25
-  m_Speed: 3.5
+  m_Speed: 0.5
   m_Acceleration: 8
   avoidancePriority: 60
   m_AngularSpeed: 120
@@ -439,8 +440,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf02d1b228a7fec4cac976d23a497fe2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  maxHealth: 100
-  currentHealth: 100
+  maxHealth: 1
+  currentHealth: 1
   destroyOnDeath: 1
   onDeath:
     m_PersistentCalls:

@@ -6,10 +6,10 @@ public class KnightAI : TroopAI
     {
         base.Awake();
 
-        stoppingDistance = 1.4f;     // Gets nicely onto the small green platform
-        attackRange = 1.7f;          // Starts attacking when close enough to visually hit
-        moveSpeed = 2.6f;
-        damagePerSecond = 30f;
+        stoppingDistance = 0.5f;     // Gets nicely onto the small green platform
+        attackRange = 1f;          // Starts attacking when close enough to visually hit
+        moveSpeed = 0.3f;
+        damagePerSecond = 0.5f;
         attackCooldown = 1.0f;
     }
 }

@@ -2,38 +2,50 @@ using UnityEngine;
 
 public class ArcherAI : TroopAI
 {
+    [Header("Archer Specific")]
     public GameObject arrowPrefab;
+    public float arrowSpawnHeight = 1.4f;
 
     protected override void Awake()
     {
         base.Awake();
-        stoppingDistance = 3.5f;      // Archer stops farther away
-        attackRange = 4.0f;           // Shoots from this distance
-        moveSpeed = 2.3f;
-        damagePerSecond = 20f;
+
+        // Archer settings
+        stoppingDistance = 3.8f;      // Stop at shooting distance
+        attackRange = 4.5f;           // Shoot from this range
+        moveSpeed = 2.2f;
+        damagePerSecond = 1f;         // Not used for archer, but kept for consistency
         attackCooldown = 1.3f;
     }
 
+    // Override AttackTarget to shoot arrow instead of direct damage
     protected override void AttackTarget()
     {
         if (Time.time - lastAttackTime < attackCooldown) return;
+
         lastAttackTime = Time.time;
 
         if (arrowPrefab != null && currentTarget != null)
         {
-            // Shoot arrow
-            Vector3 spawnPos = transform.position + Vector3.up * 1.5f;
-            GameObject arrow = Instantiate(arrowPrefab, spawnPos, Quaternion.LookRotation(currentTarget.position - transform.position));
-            ArrowProjectile proj = arrow.GetComponent<ArrowProjectile>();
-            if (proj != null)
-                proj.SetTarget(currentTarget, 1f);   // 1 damage per arrow
+            // Spawn arrow slightly above the archer
+            Vector3 spawnPos = transform.position + Vector3.up * arrowSpawnHeight;
+
+            GameObject arrowGO = Instantiate(arrowPrefab, spawnPos, Quaternion.identity);
+
+            ArrowProjectile projectile = arrowGO.GetComponent<ArrowProjectile>();
+            if (projectile != null)
+            {
+                projectile.SetTarget(currentTarget, 1f);   // 1 damage per arrow
+            }
+
+            // Make sure archer faces the target while shooting
+            Vector3 dir = (currentTarget.position - transform.position).normalized;
+            dir.y = 0f;
+            transform.rotation = Quaternion.LookRotation(dir);
         }
-        else
-        {
-            // Fallback direct damage
-            Tower tower = currentTarget.GetComponent<Tower>();
-            if (tower != null)
-                tower.TakeDamage(damagePerSecond * attackCooldown);
-        }
+
+        // Trigger attack animation
+        if (animator != null)
+            Invoke("TriggerAttackAnimation", attackAnimationDelay);
     }
 }
