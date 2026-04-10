@@ -633,9 +633,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 2784759b125fa484ebff7ae06e278ff6, type: 3}
       insertIndex: -1
       addedObject: {fileID: 789212681}
-    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 2784759b125fa484ebff7ae06e278ff6, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 2089448677}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 2784759b125fa484ebff7ae06e278ff6, type: 3}
       insertIndex: -1
@@ -646,9 +643,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 2784759b125fa484ebff7ae06e278ff6, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1605579435}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 2784759b125fa484ebff7ae06e278ff6, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1605579438}
   m_SourcePrefab: {fileID: 100100000, guid: 2784759b125fa484ebff7ae06e278ff6, type: 3}
 --- !u!4 &97705513 stripped
 Transform:
@@ -3186,9 +3180,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 2784759b125fa484ebff7ae06e278ff6, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1680683816}
-    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 2784759b125fa484ebff7ae06e278ff6, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 2145315963}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 2784759b125fa484ebff7ae06e278ff6, type: 3}
       insertIndex: -1
@@ -3199,9 +3190,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 2784759b125fa484ebff7ae06e278ff6, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1688130522}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 2784759b125fa484ebff7ae06e278ff6, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1688130525}
   m_SourcePrefab: {fileID: 100100000, guid: 2784759b125fa484ebff7ae06e278ff6, type: 3}
 --- !u!4 &1091007089 stripped
 Transform:
@@ -4351,23 +4339,6 @@ NavMeshObstacle:
   m_CarveOnlyStationary: 1
   m_Center: {x: 0, y: 0.887, z: 0}
   m_TimeToStationary: 0.5
---- !u!114 &1605579438
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1605579427}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bf5b61726506f28439707ab99bb54942, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::King
-  attackRange: 3
-  fireRate: 1.8
-  arrowPrefab: {fileID: 1160867654837931229, guid: 57c417a3832a2064c8eeffe1321c791c, type: 3}
-  firePoint: {fileID: 2089448677}
-  enemyTroopTag: PlayerTroop
 --- !u!1 &1612411194
 GameObject:
   m_ObjectHideFlags: 0
@@ -4815,23 +4786,6 @@ MonoBehaviour:
   onDeath:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &1688130525
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1688130512}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bf5b61726506f28439707ab99bb54942, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: '::'
-  attackRange: 3
-  fireRate: 1.8
-  arrowPrefab: {fileID: 1160867654837931229, guid: 57c417a3832a2064c8eeffe1321c791c, type: 3}
-  firePoint: {fileID: 2145315963}
-  enemyTroopTag: EnemyTroop
 --- !u!1 &1710602147
 GameObject:
   m_ObjectHideFlags: 0
@@ -5377,37 +5331,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: -20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!1 &2089448676
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2089448677}
-  m_Layer: 6
-  m_Name: ArrowSpawnPoint
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2089448677
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2089448676}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.9, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 97705513}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2121950376 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 2531a0dad595cd040b921440f7889e5e, type: 3}
@@ -5605,37 +5528,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2132487456}
   m_CullTransparentMesh: 1
---- !u!1 &2145315962
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2145315963}
-  m_Layer: 6
-  m_Name: ArrowSpawnPoint
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2145315963
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2145315962}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.9, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1091007089}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2146640872
 GameObject:
   m_ObjectHideFlags: 0
