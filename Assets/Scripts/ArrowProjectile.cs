@@ -18,7 +18,7 @@ public class ArrowProjectile : MonoBehaviour
 
     private void Start()
     {
-        Destroy(gameObject, lifetime);   // Safety destroy
+        Destroy(gameObject, lifetime);
     }
 
     private void Update()
@@ -47,8 +47,7 @@ public class ArrowProjectile : MonoBehaviour
     {
         if (hasHit) return;
         hasHit = true;
-
-        // Deal damage - works on BOTH troops (Health) and towers (Tower)
+        
         Health health = target.GetComponent<Health>();
         if (health != null)
         {
@@ -62,11 +61,5 @@ public class ArrowProjectile : MonoBehaviour
         }
 
         Destroy(gameObject);
-    }
-
-    // Optional: Visual hit effect
-    private void OnDestroy()
-    {
-        // You can instantiate a hit particle here later
     }
 }

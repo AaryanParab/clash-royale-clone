@@ -8,10 +8,10 @@ public class Tower : MonoBehaviour
     public float currentHealth;
 
     [Header("UI")]
-    public HealthBarUI healthBar;           // Assign your health bar UI here
+    public HealthBarUI healthBar;
 
     [Header("Events")]
-    public UnityEvent onDeath;              // Called when tower is destroyed
+    public UnityEvent onDeath;
 
     private bool isDead = false;
 
@@ -20,10 +20,7 @@ public class Tower : MonoBehaviour
         currentHealth = maxHealth;
         UpdateHealthBar();
     }
-
-    /// <summary>
-    /// Call this when any troop attacks the tower
-    /// </summary>
+    
     public void TakeDamage(float damage)
     {
         if (isDead) return;
@@ -51,8 +48,7 @@ public class Tower : MonoBehaviour
     {
         isDead = true;
         Debug.Log(gameObject.name + " has been destroyed!");
-
-        // Tell UIManager to show end screen
+        
         if (UIManager.Instance != null)
         {
             string message = gameObject.name.Contains("Player") ? "Enemy Wins!" : "Player Wins!";
@@ -60,12 +56,10 @@ public class Tower : MonoBehaviour
         }
 
         onDeath?.Invoke();
-
-        // Destroy the tower
+        
         Destroy(gameObject, 0.5f);
     }
-
-    // Optional: For testing in Inspector
+    
     [ContextMenu("Take 20 Damage")]
     private void TestDamage()
     {

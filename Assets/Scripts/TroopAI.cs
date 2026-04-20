@@ -70,8 +70,7 @@ public class TroopAI : MonoBehaviour
 
         if (!isPlayerTroop && gameObject.CompareTag("PlayerTroop"))
             isPlayerTroop = true;
-
-        // Re-check for nearest target ONLY when moving or when current target dies
+        
         if (currentTarget == null || !currentTarget.gameObject.activeInHierarchy || currentState == State.Moving)
         {
             FindNearestTarget();

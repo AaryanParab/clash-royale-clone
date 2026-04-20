@@ -23,11 +23,11 @@ public class GameManager : MonoBehaviour
     public float enemyMaxMana = 20f;
 
     [Header("Enemy AI Settings")]
-    public float enemySpawnInterval = 6f;      // Less frequent (was 1f)
-    public float enemyInitialDelay = 2f;       // Reduced initial delay
+    public float enemySpawnInterval = 6f;
+    public float enemyInitialDelay = 2f;
 
     [Header("Game Timer")]
-    public float gameDuration = 300f;          // 5 minutes = 300 seconds
+    public float gameDuration = 300f;
 
     private float nextEnemySpawnTime;
     private float gameStartTime;
@@ -43,16 +43,14 @@ public class GameManager : MonoBehaviour
         gameStartTime = Time.time;
         InvokeRepeating("RegenerateMana", 1f, 1f);
         nextEnemySpawnTime = Time.time + enemyInitialDelay;
-
-        // Start game timer
+        
         StartCoroutine(GameTimer());
     }
 
     private void Update()
     {
         if (gameEnded) return;
-
-        // Enemy spawning
+        
         if (Time.time >= nextEnemySpawnTime)
         {
             TryEnemyGreedySpawn();
@@ -106,37 +104,33 @@ public class GameManager : MonoBehaviour
             UIManager.Instance.UpdateButtonInteractability();
         }
     }
-
-    // ====================== ENEMY GREEDY SPAWNING (Every 6 seconds) ======================
+    
     private void TryEnemyGreedySpawn()
     {
         if (gameEnded) return;
-
-        // 4:1 Ratio → 80% chance Archer, 20% chance Knight
-        float randomRoll = Random.value;   // 0.0 to 1.0
+        
+        float randomRoll = Random.value; 
 
         if (randomRoll < 0.8f)   // 80% chance
         {
-            // Spawn Archer if enemy has enough mana (cost 3)
             if (currentEnemyMana >= 3f)
             {
                 SpawnEnemyArcher();
             }
             else if (currentEnemyMana >= 6f)
             {
-                SpawnEnemyKnight();   // Fallback if somehow can't afford archer
+                SpawnEnemyKnight();
             }
         }
         else   // 20% chance
         {
-            // Spawn Knight if enemy has enough mana (cost 6)
             if (currentEnemyMana >= 6f)
             {
                 SpawnEnemyKnight();
             }
             else if (currentEnemyMana >= 3f)
             {
-                SpawnEnemyArcher();   // Fallback to archer
+                SpawnEnemyArcher();
             }
         }
     }
@@ -155,7 +149,7 @@ public class GameManager : MonoBehaviour
         if (UIManager.Instance != null)
             UIManager.Instance.UpdateManaDisplays();
 
-        Debug.Log("Enemy spawned Archer (80% chance)");
+        Debug.Log("Enemy spawned Archer");
     }
 
     private void SpawnEnemyKnight()
@@ -172,8 +166,9 @@ public class GameManager : MonoBehaviour
         if (UIManager.Instance != null)
             UIManager.Instance.UpdateManaDisplays();
 
-        Debug.Log("Enemy spawned Knight (20% chance)");
+        Debug.Log("Enemy spawned Knight");
     }
+    
     // ====================== GAME TIMER & END CONDITIONS ======================
     private IEnumerator GameTimer()
     {
@@ -181,9 +176,8 @@ public class GameManager : MonoBehaviour
         if (!gameEnded)
             EndGame("Time's Up! It's a Draw");
     }
-
-    // Call this from Tower's onDeath event
-    public void OnTowerDestroyed(string towerName)
+    
+    /*public void OnTowerDestroyed(string towerName)
     {
         if (gameEnded) return;
 
@@ -191,19 +185,15 @@ public class GameManager : MonoBehaviour
             EndGame("Enemy Wins!");
         else
             EndGame("Player Wins!");
-    }
+    }*/
 
     private void EndGame(string resultMessage)
     {
         gameEnded = true;
         Debug.Log("Game Over: " + resultMessage);
-
-        // Stop all spawning and movement
+        
         StopAllCoroutines();
         CancelInvoke();
-
-        // You can trigger UI win/lose screen here later
-        // Example: FindObjectOfType<EndScreenUI>().Show(resultMessage);
     }
 
     // ====================== HELPERS ======================

@@ -3,13 +3,13 @@ using UnityEngine;
 public class King : MonoBehaviour
 {
     [Header("King Attack Settings")]
-    public float attackRange = 8f;           // Shooting range
-    public float fireRate = 1.8f;            // Shots per second (slower and stronger than archers)
+    public float attackRange = 8f;
+    public float fireRate = 1.8f;
     public GameObject arrowPrefab;
-    public Transform firePoint;              // Empty child at the top of the tower
+    public Transform firePoint;
 
     [Header("Target Settings")]
-    public string enemyTroopTag = "EnemyTroop";   // Change this in Inspector for each king
+    public string enemyTroopTag = "EnemyTroop";
 
     private float nextFireTime = 0f;
     private Transform currentTarget;
@@ -17,7 +17,7 @@ public class King : MonoBehaviour
     private void Start()
     {
         if (firePoint == null)
-            firePoint = transform;   // Fallback if no firePoint assigned
+            firePoint = transform;
     }
 
     private void Update()
@@ -58,24 +58,22 @@ public class King : MonoBehaviour
     private void ShootArrow()
     {
         if (arrowPrefab == null || currentTarget == null) return;
-
-        // Spawn arrow from fire point
+        
         Vector3 spawnPos = firePoint != null ? firePoint.position : transform.position + Vector3.up * 2f;
         GameObject arrowGO = Instantiate(arrowPrefab, spawnPos, Quaternion.identity);
 
         ArrowProjectile projectile = arrowGO.GetComponent<ArrowProjectile>();
         if (projectile != null)
         {
-            projectile.SetTarget(currentTarget, 0.8f);   // King deals 0.8 damage per arrow
+            projectile.SetTarget(currentTarget, 0.8f);
         }
-
-        // King faces the target while shooting
+        
+        /*
         Vector3 dir = (currentTarget.position - transform.position).normalized;
         dir.y = 0f;
-        transform.rotation = Quaternion.LookRotation(dir);
+        transform.rotation = Quaternion.LookRotation(dir);*/
     }
-
-    // Visual range in Scene view
+    
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;

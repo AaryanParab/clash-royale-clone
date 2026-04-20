@@ -5,7 +5,7 @@ public class ManaBarUI : MonoBehaviour
 {
     [Header("UI References")]
     public Slider manaSlider;
-    public Text manaText;               // Optional: Shows "10/20"
+    public Text manaText;
 
     public void UpdateMana(float current, float max)
     {

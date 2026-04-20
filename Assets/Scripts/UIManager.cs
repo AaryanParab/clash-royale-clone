@@ -20,7 +20,7 @@ public class UIManager : MonoBehaviour
     public TextMeshProUGUI enemyManaText;
 
     [Header("Timer")]
-    public TextMeshProUGUI timerText;           // ← New: Timer display
+    public TextMeshProUGUI timerText;
 
     [Header("End Game Screen")]
     public GameObject endGamePanel;
@@ -42,22 +42,19 @@ public class UIManager : MonoBehaviour
     private void Start()
     {
         gameStartTime = Time.time;
-
-        // Link spawn buttons
+        
         if (knightButton != null)
             knightButton.onClick.AddListener(() => GameManager.Instance.SpawnKnight());
 
         if (archerButton != null)
             archerButton.onClick.AddListener(() => GameManager.Instance.SpawnArcher());
-
-        // Link end game buttons
+        
         if (restartButton != null)
             restartButton.onClick.AddListener(RestartGame);
 
         if (quitButton != null)
             quitButton.onClick.AddListener(QuitGame);
-
-        // Hide end screen at start
+        
         if (endGamePanel != null)
             endGamePanel.SetActive(false);
 
@@ -68,8 +65,7 @@ public class UIManager : MonoBehaviour
     private void Update()
     {
         if (gameEnded) return;
-
-        // Update Timer every frame
+        
         UpdateTimer();
     }
 
@@ -115,8 +111,7 @@ public class UIManager : MonoBehaviour
         int seconds = Mathf.FloorToInt(timeLeft % 60f);
 
         timerText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
-
-        // Optional: Change color when time is low
+        
         if (timeLeft <= 30f)
             timerText.color = Color.red;
     }
@@ -130,7 +125,7 @@ public class UIManager : MonoBehaviour
         endGamePanel.SetActive(true);
         resultText.text = resultMessage;
 
-        Time.timeScale = 0f;        // Pause the game
+        Time.timeScale = 0f;
     }
 
     private void RestartGame()

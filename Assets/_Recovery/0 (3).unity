@@ -4363,7 +4363,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf5b61726506f28439707ab99bb54942, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::King
-  attackRange: 5
+  attackRange: 3
   fireRate: 1.8
   arrowPrefab: {fileID: 1160867654837931229, guid: 57c417a3832a2064c8eeffe1321c791c, type: 3}
   firePoint: {fileID: 2089448677}
@@ -4827,7 +4827,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf5b61726506f28439707ab99bb54942, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  attackRange: 5
+  attackRange: 3
   fireRate: 1.8
   arrowPrefab: {fileID: 1160867654837931229, guid: 57c417a3832a2064c8eeffe1321c791c, type: 3}
   firePoint: {fileID: 2145315963}
@@ -5800,14 +5800,6 @@ PrefabInstance:
     - target: {fileID: 5010921978731109900, guid: 8b470e239bfadb2419c66de951905923, type: 3}
       propertyPath: m_ObstacleAvoidanceType
       value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 7833944529779278648, guid: 8b470e239bfadb2419c66de951905923, type: 3}
-      propertyPath: onDeath.m_PersistentCalls.m_Calls.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7833944529779278648, guid: 8b470e239bfadb2419c66de951905923, type: 3}
-      propertyPath: onDeath.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
